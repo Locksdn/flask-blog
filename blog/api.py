@@ -1,58 +1,26 @@
-from flask import Flask, json, request, jsonify
-from flask_sqlalchemy import SQLAlchemy
+from flask import jsonify, request
+from .app import db, app
+from .models import Entry
 
-import datetime
-
-app = Flask(__name__)
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
-
-db = SQLAlchemy(app)
-
-class Entry(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(255), unique=True, nullable=False)
-    draft = db.Column(db.Boolean, default=True, index=True)
-    content = db.Column(db.Text, nullable=False)
-    timestamp = db.Column(db.DateTime, default=datetime.datetime.now, index=True)
-
-    def __init__(self, title, content):
-        self.title = title
-        self.content = content
-    
-    def publish(self):
-        self.draft = False
-
-
+#   GET EVERY ENTRY
 @app.route('/entry', methods=['GET'])
 def get_all_entries():
     entries = Entry.query.all()
 
     output = []
-
     for entry in entries:
-        entry_data = {
-            'title': entry.title,
-            'content': entry.content
-        }
-        output.append(entry_data)
+        output.append(entry.getJson())
     
     return jsonify(output)
 
-#   GET ENTRY
+#   GET ENTRY BY ID
 @app.route('/entry/<entry_id>', methods=['GET'])
 def get_post(entry_id):
     entry = Entry.query.filter_by(id=entry_id).first()
 
     if not entry:
         return jsonify({'message': 'No entry found'})
-    
-    entry_data = {
-        'title': entry.title,
-        'content': entry.content
-    }
-    
-    return jsonify(entry_data)
+    return jsonify(entry.getJson())
 
 
 #   CREATE ENTRY
@@ -65,7 +33,8 @@ def create_entry():
     db.session.commit()
 
     return jsonify({
-        'message': 'Entry created!'
+        'message': 'Entry created!',
+        'entry': new_entry.getJson()
     })
 
 #   EDIT ENTRY
@@ -96,6 +65,3 @@ def delete_entry(entry_id):
     db.session.commit()
 
     return jsonify({'message': 'Entry deleted!'})
-
-if __name__ == '__main__':
-    app.run(debug=True)
