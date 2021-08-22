@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% block title %} Admin signup {% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            <h3>Login</h3>
+            <form action="/admin/signup" method="POST">
+                <div class="from-group">
+                    <label for="name">Name</label>
+                    <input class="form-control" type="text" name="name" id="name">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input class="form-control" type="password" name="password" id="password">
+                </div>
+                <br>
+                <button class="btn btn-secondary float-end">Signup</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

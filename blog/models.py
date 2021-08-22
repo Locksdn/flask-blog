@@ -1,5 +1,16 @@
+from enum import unique
+from flask_login import UserMixin
 from datetime import datetime
 from .app import db
+
+class User(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name =  db.Column(db.String(200), unique=True)
+    password = db.Column(db.String(200))
+
+    def __init__(self, name, password):
+        self.name = name
+        self.password = password
 
 class Entry(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -12,7 +23,7 @@ class Entry(db.Model):
         self.title = title
         self.content = content
 
-    def getJson(self):
+    def to_dic(self):
         data = {
             'id': self.id,
             'title': self.title,

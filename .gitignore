@@ -1,3 +1,4 @@
 .env
 blog/data.db
+blog/data_backup.db
 blog/__pycache__

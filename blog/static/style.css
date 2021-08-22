@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Hina+Mincho&display=swap');
+
 :root {
     --primary-color: #fffcf2;
     --secondary-color: #ccc5b9;
@@ -5,7 +7,17 @@
     --highlight: #eb5e28;
 }
 
-.body {
+a {
+    text-decoration: none!important;
+    color: var(--text-color)
+}
+
+a:hover {
+    color: var(--highlight)
+}
+
+body {
+    font-family: 'Hina Mincho', serif; 
     background-color: var(--secondary-color);
     color: var(--text-color);
 }
@@ -14,9 +26,14 @@
     overflow: hidden;
 }
 
-.entry {
+.card {
+    font-size: larger;
     background-color: var(--primary-color);
     margin-bottom: 20px;
+}
+
+.card-footer {
+    text-align: end;
 }
 
 @media (min-width: 768px){
