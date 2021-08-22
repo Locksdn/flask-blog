@@ -6,7 +6,7 @@ views = Blueprint('views', __name__)
 @views.route('/')
 def index():
     entries = Entry.query.all()
-    return render_template('index.html', entries=entries)
+    return render_template('index.html', entries=reversed(entries))
 
 @views.route('/entry/<entry_id>')
 def entry(entry_id):

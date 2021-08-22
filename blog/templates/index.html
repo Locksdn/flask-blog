@@ -9,7 +9,7 @@
     <div class="entry">
         <div class="card-body p-4">
             <a href="/entry/{{entry.id}}"><h2 class="card-title">{{entry.title}}</h2></a>
-            <p>{{entry.content[:225]}}</p>
+            {{entry.content|markdown}}
             <a href="/entry/{{entry.id}}">Seguir Leyendo</a>
         </div>
         <div class="card-footer">

@@ -5,11 +5,16 @@ from .app import db, app
 from .models import Entry
 
 class EntryAPI(MethodView):
-    def get(self, entry_id):
+    def get(self, entry_id, draft=False):
         if entry_id is None:
-            entries = Entry.query.all()
-            output = [entry.to_dic() for entry in entries]
+            if draft is True:
+                if not current_user.is_authenticated:
+                    return current_app.login_manager.unauthorized()
+                entries = Entry.query.all()
+            else:
+                entries = Entry.query.filter_by(draft=False)
             
+            output = [entry.to_dic() for entry in entries]   
             return jsonify(output)
 
         else:
@@ -22,9 +27,10 @@ class EntryAPI(MethodView):
         if not current_user.is_authenticated:
             return current_app.login_manager.unauthorized()
 
-        data = request.get_json()
+        title = request.form.get('title')
+        content = request.form.get('content')
 
-        new_entry = Entry(data['title'], data['content'])
+        new_entry = Entry(title, content)
         db.session.add(new_entry)
         db.session.commit()
 
@@ -38,15 +44,13 @@ class EntryAPI(MethodView):
         if not current_user.is_authenticated:
             return current_app.login_manager.unauthorized()
 
-        data = request.get_json()
-
         entry = Entry.query.filter_by(id=entry_id).first()
 
         if not entry:
             return jsonify({'message': 'Entry not found'})
 
-        entry.title = data['title']
-        entry.content = data['content']
+        entry.title = request.form.get('title')
+        entry.content = request.form.get('content')
 
         db.session.commit()
         return jsonify({'message': 'Entry edited!'})

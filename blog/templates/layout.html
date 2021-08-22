@@ -9,12 +9,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/24919733?v=4" type="image/x-icon">
+
+    {% block link %}{% endblock %}
 </head>
 <body>
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-3 col-md-4 p-4 info">
-                <h1>Blog</h1>
+                <a href="{{url_for('views.index')}}">
+                    <h1>Blog</h1>
+                </a>
             </div>
             <div class="col-lg-9 col-md-8 p-3 content">
                 {% block content %}{% endblock %}

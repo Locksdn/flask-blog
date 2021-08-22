@@ -27,6 +27,10 @@ body {
 }
 
 .card {
+    background-color: var(--primary-color);
+}
+
+.entry {
     font-size: larger;
     background-color: var(--primary-color);
     margin-bottom: 20px;

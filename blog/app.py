@@ -1,12 +1,14 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from flaskext.markdown import Markdown
 
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'themostsecretkeyintheworld'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 
+Markdown(app, safe_mode=True)
 db = SQLAlchemy(app)
 
 login_manager = LoginManager()

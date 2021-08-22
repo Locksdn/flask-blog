@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block title %} New Entry {% endblock %}
+
+{% block link %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <form action="/api/entry" method="POST">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input class="form-control" type="text" name="title" id="title">
+            </div>
+            <div class="form-group">
+                <label for="content">Content</label>
+                <textarea name="content" id="content" cols="30" rows="10"></textarea>
+            </div>
+            <br>
+            <button class="btn btn-secondary float-end"></button>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+<script>
+    let simplemde = new SimpleMDE({element: document.getElementById('content')})
+</script>
+{% endblock %}

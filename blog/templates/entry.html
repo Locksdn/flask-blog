@@ -8,7 +8,7 @@
     <div class="entry">
         <div class="card-body p-4">
             <h2 class="card-title">{{entry.title}}</h2>
-            <p>{{entry.content}}</p>
+            {{entry.content|markdown}}
         </div>
         <div class="card-footer">
             <p>{{entry.timestamp.strftime('%d-%m-%Y %H:%M')}}</p>
