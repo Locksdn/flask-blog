@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block header %}
+    {% block title %} {{entry.title}} {% endblock %}
+{% endblock %}
+
+{% block content %}
+    <div class="entry">
+        <div class="card-body">
+            <h2 class="card-title">{{entry.title}}</h2>
+            <p>{{entry.content}}</p>
+        </div>
+        <div class="card-footer">
+            <span>{{entry.timestamp.strftime('%d-%m-%Y %H:%M')}}</span>
+        </div>
+    </div>
+{% endblock %}

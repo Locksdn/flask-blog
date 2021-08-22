@@ -1,0 +1,31 @@
+:root {
+    --primary-color: #fffcf2;
+    --secondary-color: #ccc5b9;
+    --text-color: #403d39;
+    --highlight: #eb5e28;
+}
+
+.body {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+.info {
+    overflow: hidden;
+}
+
+.entry {
+    background-color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+@media (min-width: 768px){
+    body {
+        overflow: hidden;
+    }
+
+    .content {
+        height: 100vh;
+        overflow-y:scroll;
+    }
+}

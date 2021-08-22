@@ -8,3 +8,4 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 db = SQLAlchemy(app)
 
 from . import api
+from . import views

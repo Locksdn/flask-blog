@@ -3,7 +3,7 @@ from .app import db, app
 from .models import Entry
 
 #   GET EVERY ENTRY
-@app.route('/entry', methods=['GET'])
+@app.route('/api/entry', methods=['GET'])
 def get_all_entries():
     entries = Entry.query.all()
 
@@ -14,7 +14,7 @@ def get_all_entries():
     return jsonify(output)
 
 #   GET ENTRY BY ID
-@app.route('/entry/<entry_id>', methods=['GET'])
+@app.route('/api/entry/<entry_id>', methods=['GET'])
 def get_post(entry_id):
     entry = Entry.query.filter_by(id=entry_id).first()
 
@@ -24,7 +24,7 @@ def get_post(entry_id):
 
 
 #   CREATE ENTRY
-@app.route('/entry', methods=['POST'])
+@app.route('/api/entry', methods=['POST'])
 def create_entry():
     data = request.get_json()
 
@@ -38,7 +38,7 @@ def create_entry():
     })
 
 #   EDIT ENTRY
-@app.route('/entry/<entry_id>', methods=['PUT'])
+@app.route('/api/entry/<entry_id>', methods=['PUT'])
 def post_entry(entry_id):
     data = request.get_json()
 
@@ -54,7 +54,7 @@ def post_entry(entry_id):
     return jsonify({'message': 'Entry edited!'})
 
 #   DELETE ENTRY
-@app.route('/entry/<entry_id>', methods=['DELETE'])
+@app.route('/api/entry/<entry_id>', methods=['DELETE'])
 def delete_entry(entry_id):
     entry = Entry.query.filter_by(id=entry_id).first()
 

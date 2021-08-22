@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% block header %}
+    {% block title %} Inicio {% endblock %}
+{% endblock %}
+
+{% block content %}
+    {% for entry in entries: %}
+    <div class="entry">
+        <div class="card-body p-4">
+            <h2 class="card-title">{{entry.title}}</h2>
+            <p>{{entry.content}}</p>
+        </div>
+        <div class="card-footer">
+            <span>{{entry.timestamp.strftime('%d-%m-%Y %H:%M')}}</span>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}
